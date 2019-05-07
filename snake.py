@@ -1,3 +1,7 @@
+import os
+import random
+
+
 def generate_table(column, row):
     table = []
     for i in range(column):
@@ -6,6 +10,7 @@ def generate_table(column, row):
 
 
 def print_table(table):
+    os.system("clear")
     dash = "--"
     for row in table:
         for elem in row:
@@ -21,9 +26,17 @@ def print_table(table):
     print(dash)
 
 
-def main():
-    print_table(generate_table(20, 30))
+def create_object(table):
+    rand_col_index = random.randint(0, (len(table)-1))
+    rand_row_index = random.randint(0, (len(table[rand_col_index])-1))
+    table[rand_col_index][rand_row_index] = "Ó"
 
+
+def main():
+    board = generate_table(20, 30)
+    print_table(board)
+    create_object(board)
+    print_table(board)
 
 if __name__ == "__main__":
     main()
