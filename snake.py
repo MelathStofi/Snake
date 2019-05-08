@@ -71,6 +71,7 @@ def main():
                 row_index -= 1
             board[column_index][row_index] = "@"
             print_table(board)
+            board[column_index][row_index] = " "
 
 
 if __name__ == "__main__":
