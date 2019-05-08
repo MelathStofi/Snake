@@ -1,5 +1,6 @@
 import os
 import random
+import time
 
 
 def getch():
@@ -39,8 +40,19 @@ def print_table(table):
     print(dash)
 
 
-def print_snake(table):
-    pass
+def generate_snake(table, move):
+    col_ind = 10
+    row_ind = 15
+
+    if move == "w":
+        col_ind -= 1
+    elif move == "s":
+        col_ind += 1
+    elif move == "d":
+        row_ind += 1
+    elif move == "a":
+        row_ind -= 1
+    table[col_ind][row_ind] = "@"
 
 
 def generate_object(table):
@@ -51,19 +63,17 @@ def generate_object(table):
 
 def main():
     board = generate_table(20, 30)
+
     while True:
         generate_object(board)
         print_table(board)
+
         while True:
             move = getch()
-            if move == "w":
-                print("testing")
-            elif move == "s":
-                print("testing")
-            elif move == "d":
-                print("testing")
-            elif move == "a":
-                print("testing")
+            generate_snake(board, move)
+            time.sleep
+            os.system("clear")
+            print_table(board)
 
 
 if __name__ == "__main__":
