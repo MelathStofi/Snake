@@ -40,19 +40,8 @@ def print_table(table):
     print(dash)
 
 
-def generate_snake(table, move):
-    col_ind = 10
-    row_ind = 15
-
-    if move == "w":
-        col_ind -= 1
-    elif move == "s":
-        col_ind += 1
-    elif move == "d":
-        row_ind += 1
-    elif move == "a":
-        row_ind -= 1
-    table[col_ind][row_ind] = "@"
+def generate_snake(table, move, column_index, row_index):
+    pass
 
 
 def generate_object(table):
@@ -63,16 +52,24 @@ def generate_object(table):
 
 def main():
     board = generate_table(20, 30)
-
+    column_index = 10
+    row_index = 15
     while True:
         generate_object(board)
         print_table(board)
 
         while True:
             move = getch()
-            generate_snake(board, move)
-            time.sleep
-            os.system("clear")
+            generate_snake(board, move, column_index, row_index)
+            if move == "w":
+                column_index -= 1
+            elif move == "s":
+                column_index += 1
+            elif move == "d":
+                row_index += 1
+            elif move == "a":
+                row_index -= 1
+            board[column_index][row_index] = "@"
             print_table(board)
 
 

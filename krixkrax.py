@@ -21,7 +21,7 @@ def execute():
 
 
 
-'''
+
 import curses
 
 # get the curses screen window
@@ -77,3 +77,4 @@ while True:
         print("testing")
     elif x == "s":
         print
+'''
