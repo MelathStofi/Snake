@@ -2,6 +2,35 @@ import os
 import random
 import time
 
+def generate_menu():
+    #menu generator for snake 
+    print("************Welcome to Snake**************")
+    print()
+
+    choice = input("""
+                      A: Start Game
+                      B: Highscore
+                      Q: Quit
+
+                      Please enter your choice: """)
+
+    if choice == "A" or choice =="a":
+        start_game()
+    elif choice == "B" or choice =="b":
+        highscore()
+    elif choice=="Q" or choice=="q":
+        sys.exit
+    else:
+        print("You must only select either A or B")
+        print("Please try again")
+        menu()
+
+def start_game():
+   pass
+    
+def highscore():
+   pass
+
 
 def getch():
     # Ez itt a billentyűzetfigyelő függvény!
