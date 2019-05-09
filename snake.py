@@ -5,6 +5,7 @@ import tty
 import termios
 
 
+
 def generate_menu():
     # menu generator for snake 
     print("************Welcome to Snake**************")
@@ -126,6 +127,11 @@ def main():
                         coordinates[1] += 1
                     elif move == "a":
                         coordinates[1] -= 1
+
+                    if coordinates[0] < 0 or coordinates[1] < 0:
+                        print("GAME OVER")
+                        sys.exit()
+
                     board[coordinates[0]][coordinates[1]] = "@"
                     print_table(board)
                     print_score(score)
