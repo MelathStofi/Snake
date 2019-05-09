@@ -74,34 +74,41 @@ def generate_snake(table, move, column_index, row_index):
     pass
 
 
-def generate_object(table):
+def generate_object(table, obj):
     rand_col_index = random.randint(0, (len(table)-1))
     rand_row_index = random.randint(0, (len(table[rand_col_index])-1))
-    table[rand_col_index][rand_row_index] = "Ó"
+    table[rand_col_index][rand_row_index] = obj
 
 
-def find_object(table):
+def find_object(table, obj):
     place = []
     for i_zero, row in enumerate(table):
         for i_one, elem in enumerate(row):
-            if elem == "Ó":
+            if elem == obj:
                 place.extend([i_zero, i_one])
     return place
 
 
+def print_score(score):
+    print(f"score: {score}\n")
+
+
 def main():
     board = generate_table(20, 30)
+    object_char = "Ó"
     coordinates = [10, 15]
+    score = 0
     while True:
         board[coordinates[0]][coordinates[1]] = "@"
-        generate_object(board)
-        object_place = find_object(board)
+        generate_object(board, object_char)
+        object_place = find_object(board, object_char)
         print_table(board)
-
+        print_score(score)
         while True:
             try:
                 board[coordinates[0]][coordinates[1]] = " "
                 if coordinates == object_place:
+                    score += 1
                     break
 
                 else:
@@ -117,6 +124,7 @@ def main():
                         coordinates[1] -= 1
                     board[coordinates[0]][coordinates[1]] = "@"
                     print_table(board)
+                    print_score(score)
             except:
                 print("GAME OVER")
 
