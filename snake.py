@@ -50,28 +50,44 @@ def generate_object(table):
     table[rand_col_index][rand_row_index] = "Ó"
 
 
+def find_object(table):
+    place = []
+    for i_zero, row in enumerate(table):
+        for i_one, elem in enumerate(row):
+            if elem == "Ó":
+                place.extend([i_zero, i_one])
+    return place
+
+
 def main():
     board = generate_table(20, 30)
-    column_index = 10
-    row_index = 15
+    coordinates = [10, 15]
     while True:
+        board[coordinates[0]][coordinates[1]] = "@"
         generate_object(board)
+        object_place = find_object(board)
         print_table(board)
 
         while True:
-            move = getch()
-            generate_snake(board, move, column_index, row_index)
-            if move == "w":
-                column_index -= 1
-            elif move == "s":
-                column_index += 1
-            elif move == "d":
-                row_index += 1
-            elif move == "a":
-                row_index -= 1
-            board[column_index][row_index] = "@"
-            print_table(board)
-            board[column_index][row_index] = " "
+            board[coordinates[0]][coordinates[1]] = " "
+            if coordinates == object_place:
+                break
+
+            else:
+                move = getch()
+                # generate_snake(board, move, column_index, row_index)
+                if move == "w":
+                    coordinates[0] -= 1
+                elif move == "s":
+                    coordinates[0] += 1
+                elif move == "d":
+                    coordinates[1] += 1
+                elif move == "a":
+                    coordinates[1] -= 1
+                board[coordinates[0]][coordinates[1]] = "@"
+                print_table(board)
+
+
 
 
 if __name__ == "__main__":
