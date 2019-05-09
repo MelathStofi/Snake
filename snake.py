@@ -1,6 +1,7 @@
 import os
 import random
 import time
+import sys
 
 def generate_menu():
     #menu generator for snake 
@@ -90,18 +91,23 @@ def main():
         while True:
             move = getch()
             generate_snake(board, move, column_index, row_index)
-            if move == "w":
-                column_index -= 1
-            elif move == "s":
-                column_index += 1
-            elif move == "d":
-                row_index += 1
-            elif move == "a":
-                row_index -= 1
-            board[column_index][row_index] = "@"
-            print_table(board)
-            board[column_index][row_index] = " "
-
+            try:
+                if move == "w":
+                    column_index -= 1
+                elif move == "s":
+                    column_index += 1
+                elif move == "d":
+                    row_index += 1
+                elif move == "a":
+                    row_index -= 1
+                board[column_index][row_index] = "@"
+                print_table(board)
+                board[column_index][row_index] = " "
+            except:
+                print("GAME OVER")
+                
+                sys.exit()
+        
 
 if __name__ == "__main__":
     main()
