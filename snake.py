@@ -89,6 +89,7 @@ def find_object(table, obj):
         for i_one, elem in enumerate(row):
             if elem == obj:
                 place.extend([i_zero, i_one])
+                break
     return place
 
 
