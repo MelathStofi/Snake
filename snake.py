@@ -1,10 +1,12 @@
 import os
 import random
-import time
 import sys
+import tty
+import termios
+
 
 def generate_menu():
-    #menu generator for snake 
+    # menu generator for snake 
     print("************Welcome to Snake**************")
     print()
 
@@ -15,27 +17,28 @@ def generate_menu():
 
                       Please enter your choice: """)
 
-    if choice == "A" or choice =="a":
+    if choice == "A" or choice == "a":
         start_game()
-    elif choice == "B" or choice =="b":
+    elif choice == "B" or choice == "b":
         highscore()
-    elif choice=="Q" or choice=="q":
+    elif choice == "Q" or choice == "q":
         sys.exit
     else:
         print("You must only select either A or B")
         print("Please try again")
         menu()
 
+
 def start_game():
-   pass
-    
+    pass
+
+
 def highscore():
-   pass
+    pass
 
 
 def getch():
     # Ez itt a billentyűzetfigyelő függvény!
-    import sys, tty, termios
     fd = sys.stdin.fileno()
     old_settings = termios.tcgetattr(fd)
     try:
