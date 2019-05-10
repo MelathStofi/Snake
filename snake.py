@@ -35,7 +35,7 @@ def menu():
                       Please enter your choice: """)
 
     if choice == "A" or choice == "a":
-        start_game()
+        main()
     elif choice == "B" or choice == "b":
         highscore()
     elif choice == "Q" or choice == "q":
@@ -144,6 +144,6 @@ if __name__ == "__main__":
         # listener.join()
         # istener.start()
         try:
-            main()
+            menu()
         finally:
             listener.stop()
