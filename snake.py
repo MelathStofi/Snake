@@ -2,7 +2,7 @@ import os
 import random
 import time
 import sys
-from pynput.keyboard import Key, Listener # ezt a modult installálni kő!
+from pynput.keyboard import Key, Listener  # ezt a modult installálni kő!
 
 
 key_pressed = chr(0)
@@ -35,7 +35,7 @@ def menu():
                       Please enter your choice: """)
 
     if choice == "A" or choice == "a":
-        start_game()
+        main()
     elif choice == "B" or choice == "b":
         highscore()
     elif choice == "Q" or choice == "q":
@@ -128,11 +128,17 @@ def main():
                             coordinates[1] += 1
                         elif move == "'a'":
                             coordinates[1] -= 1
+                        elif move == "'q'":
+                            pass
+                        if coordinates[0] < 0 or coordinates[1] < 0:
+                            print("GAME OVER")
+                            sys.exit()
 
                         board[coordinates[0]][coordinates[1]] = "@"
                         print_table(board)
                         print_score(score)
                         time.sleep(0.12)
+
             except:
                 print("GAME OVER")
 
@@ -144,6 +150,6 @@ if __name__ == "__main__":
         # listener.join()
         # istener.start()
         try:
-            main()
+            menu()
         finally:
             listener.stop()
