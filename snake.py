@@ -2,7 +2,7 @@ import os
 import random
 import time
 import sys
-from pynput.keyboard import Key, Listener
+from pynput.keyboard import Key, Listener # ezt a modult installálni kő!
 
 
 key_pressed = chr(0)
