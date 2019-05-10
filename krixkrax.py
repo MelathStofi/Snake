@@ -17,7 +17,9 @@ with keyboard.Listener(on_press=on_press, on_release=on_release) as listener:
 
 
 def execute():
-    print("kakk")'''
+    print("kakk")
+
+
 
 
 
@@ -56,7 +58,9 @@ finally:
     screen.keypad(0)
     curses.echo()
     curses.endwin()
-'''
+
+
+
 
 
 def getch():
@@ -78,3 +82,31 @@ while True:
     elif x == "s":
         print
 '''
+
+
+
+
+def menu():
+    print("************Welcome to Snake**************")
+    print()
+
+    choice = input("""
+                      A: Start Game
+                      B: Highscore
+                      Q: Quit
+
+                      Please enter your choice: """)
+
+    if choice == "A" or choice == "a":
+        start_game()
+    elif choice == "B" or choice == "b":
+        highscore()
+    elif choice == "Q" or choice == "q":
+        sys.exit
+    else:
+        print("You must only select either A or B")
+        print("Please try again")
+        menu()
+
+if __name__ == "__main__":
+    menu()

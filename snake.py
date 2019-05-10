@@ -1,13 +1,29 @@
 import os
 import random
+import time
 import sys
-import tty
-import termios
+from pynput.keyboard import Key, Listener
 
 
+key_pressed = chr(0)
 
-def generate_menu():
-    # menu generator for snake 
+
+def on_press(key):
+    global key_pressed
+    # print('{0} pressed'.format(key))
+    key_pressed = key
+
+
+def on_release(key):
+    global key_pressed
+    # print('{0} release'.format(key))
+    if key == Key.esc:
+        # Stop listener
+        return False
+
+
+def menu():
+    # menu generator for snake
     print("************Welcome to Snake**************")
     print()
 
@@ -38,18 +54,6 @@ def highscore():
     pass
 
 
-def getch():
-    # Ez itt a billentyűzetfigyelő függvény!
-    fd = sys.stdin.fileno()
-    old_settings = termios.tcgetattr(fd)
-    try:
-        tty.setraw(sys.stdin.fileno())
-        ch = sys.stdin.read(1)
-    finally:
-        termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
-    return ch
-
-
 def generate_table(column, row):
     table = []
     for i in range(column):
@@ -72,10 +76,6 @@ def print_table(table):
             one_row += str(elem)
         print(f"|{one_row}|")
     print(dash)
-
-
-def generate_snake(table, move, column_index, row_index):
-    pass
 
 
 def generate_object(table, obj):
@@ -101,8 +101,8 @@ def print_score(score):
 def main():
     board = generate_table(20, 30)
     object_char = "Ó"
-    coordinates = [10, 15]
     score = 0
+    coordinates = [10, 15]
     while True:
         board[coordinates[0]][coordinates[1]] = "@"
         generate_object(board, object_char)
@@ -115,26 +115,24 @@ def main():
                 if coordinates == object_place:
                     score += 1
                     break
-
                 else:
-                    move = getch()
-                    # generate_snake(board, move, column_index, row_index)
-                    if move == "w":
-                        coordinates[0] -= 1
-                    elif move == "s":
-                        coordinates[0] += 1
-                    elif move == "d":
-                        coordinates[1] += 1
-                    elif move == "a":
-                        coordinates[1] -= 1
+                    if key_pressed == chr(0):
+                        pass
+                    else:
+                        move = str(key_pressed)
+                        if move == "'w'":
+                            coordinates[0] -= 1
+                        elif move == "'s'":
+                            coordinates[0] += 1
+                        elif move == "'d'":
+                            coordinates[1] += 1
+                        elif move == "'a'":
+                            coordinates[1] -= 1
 
-                    if coordinates[0] < 0 or coordinates[1] < 0:
-                        print("GAME OVER")
-                        sys.exit()
-
-                    board[coordinates[0]][coordinates[1]] = "@"
-                    print_table(board)
-                    print_score(score)
+                        board[coordinates[0]][coordinates[1]] = "@"
+                        print_table(board)
+                        print_score(score)
+                        time.sleep(0.12)
             except:
                 print("GAME OVER")
 
@@ -142,4 +140,10 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    with Listener(on_press=on_press, on_release=on_release) as listener:
+        # listener.join()
+        # istener.start()
+        try:
+            main()
+        finally:
+            listener.stop()
